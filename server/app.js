@@ -32,7 +32,8 @@ app.use(cors())
 // SOCKET.IO
 const socketIO = new Server(http, {
   cors: {
-    origin: "*",
+    origin: "https://v-qqhf.vercel.app", // Replace with your actual Vercel domain
+    methods: ["GET", "POST"], // Optionally specify allowed HTTP methods
   },
 })
 
