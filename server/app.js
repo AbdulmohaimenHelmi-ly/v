@@ -18,8 +18,8 @@ const http = createServer(app)
 const globalClient = new Client()
 globalClient
   .setEndpoint("https://cloud.appwrite.io/v1")
-  .setProject(process.env.PROJECT_ID)
-  .setKey(process.env.API_KEY)
+  .setProject("66d1d5a5001f5266e9ed")
+  .setKey("34c22d6268c53b4b0e921aaad10ab07a984c6fae4735a0781a78e61a815167bc5ad164cb9696a54a5e0c80a167df34318359fe1e5b67ce672db0e60fe4a74804e0874a3fa0856e5bddea7fc7bf5b38a70185ac42a69b45beedac1769c56d5ac8e79a1ef37fa4f4339bc7a874b410efb4dd0140d8be95b2c7bd6327321e63b825")
 const teams = new Teams(globalClient)
 const db = new Databases(globalClient)
 const users = new Users(globalClient)
@@ -53,8 +53,8 @@ socketIO.on("connection", (socket) => {
 
     try {
       const messages = await db.listDocuments(
-        process.env.DATABASE_ID,
-        process.env.MESSAGE_COLLECTION_ID,
+        "66d20f4d00038c14ca61",
+        "66d20f98003e64152c8a",
         [Query.equal("room_id", room_id), Query.limit(100)]
       )
       // Join Room
@@ -88,14 +88,14 @@ socketIO.on("connection", (socket) => {
       socketIO.to(room_id).emit("recieve_message", rest)
       socketIO.to(room_id).emit("last_message", { room_id, ...last_message })
       const msg = await db.createDocument(
-        process.env.DATABASE_ID,
-        process.env.MESSAGE_COLLECTION_ID,
+        "66d20f4d00038c14ca61",
+        "66d20f98003e64152c8a",
         ID.unique(),
         { room_id, ...rest }
       )
       await db.updateDocument(
-        process.env.DATABASE_ID,
-        process.env.PROJECT_COLLECTION_ID,
+        "66d20f4d00038c14ca61",
+       "66d20f98003e64152c8a",
         room_id,
         { last_message: JSON.stringify(last_message) }
       )
@@ -110,8 +110,8 @@ app.use("/api/v1/user", userRouter)
 app.use("/api/v1/task", taskRouter)
 app.use("/api/v1/project", projectRouter)
 
-http.listen(process.env.PORT, async () => {
-  console.log(`Server is running on port ${process.env.PORT}`.green)
+http.listen("http://66d212360117d3d906db.appwrite.global/", async () => {
+  console.log(`Server is running on port http://66d212360117d3d906db.appwrite.global/`.green)
   try {
   } catch (error) {
     console.log(`${error}`.bgRed.white)
